@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    username: root
+    password: 20021014
+    url: jdbc:mysql://localhost:3306/myblog?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+
+server:
+  port: 8080
+
+#阿里云oss配置项目
+aliyun:
+  oss:
+    endpoint: oss-cn-hangzhou.aliyuncs.com
+    keyid: LTAI5tHyNTi5MALR7n59bAgE
+    keysecret: dp2Gz5TjHxKG5P57Nbq3lL5KzZhTTz
+    bucketname: jun-blog

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.myblog.mapper.AdminMapper">
+
+
+    <insert id="addBlog" parameterType="com.example.myblog.entity.Blog">
+        insert into myblog.blog(blogName,blogLocal,id) values (#{blogName},#{blogLocal},#{id})
+    </insert>
+    <select id="checkUserByName" parameterType="string" resultType="com.example.myblog.entity.Account">
+        select * from myblog.account where username = #{username}
+    </select>
+    <delete id="deleteUserByName" parameterType="string" >
+        delete from myblog.account where username = #{username}
+    </delete>
+    <select id="checkBlogByName" parameterType="string" resultType="com.example.myblog.entity.Blog">
+        select * from myblog.blog where blogName = #{blogName}
+    </select>
+    <delete id="deleteBlogByName" parameterType="string">
+        delete from myblog.blog where blogName = #{blogName}
+    </delete>
+    <insert id="addPicture" parameterType="com.example.myblog.entity.Picture">
+        insert into myblog.picture(pictureName,pictureLocal) values (#{pictureName},#{pictureLocal})
+    </insert>
+
+</mapper>

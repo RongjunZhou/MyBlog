@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.myblog.mapper.UserMapper">
+    <select id="requestBlogByName" parameterType="string" resultType="com.example.myblog.entity.Blog">
+        select * from myblog.blog where blogName = #{blogName}
+    </select>
+    <select id="requestBlogByDate" parameterType="int" resultType="com.example.myblog.entity.Blog">
+        select * from myblog.blog where id=#{id}
+    </select>
+    <select id="requestUserByName" resultType="com.example.myblog.entity.Account" parameterType="java.lang.String">
+        select * from myblog.account where username=#{username}
+    </select>
+    <select id="checkUser" resultType="java.lang.Integer" parameterType="java.lang.String">
+        select count(*) from myblog.account where username=#{username}
+    </select>
+    <insert id="addUser" parameterType="com.example.myblog.entity.Account" >
+        insert into myblog.account(username, password, email,role) values (#{username},#{password},#{email},#{role})
+    </insert>
+    <insert id="addComment" parameterType="com.example.myblog.entity.Comment">
+        insert into myblog.comment(id, commenter, commentValue) VALUES (#{id},#{commenter},#{commentValue})
+    </insert>
+    <update id="fixPassword" parameterType="string" >
+        update myblog.account set password=#{password} where username=#{username}
+    </update>
+</mapper>
