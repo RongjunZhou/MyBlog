@@ -15,6 +15,6 @@ server:
 aliyun:
   oss:
     endpoint: oss-cn-hangzhou.aliyuncs.com
-    keyid: LTAI5tHyNTi5MALR7n59bAgE
-    keysecret: dp2Gz5TjHxKG5P57Nbq3lL5KzZhTTz
-    bucketname: jun-blog
+    keyid: 
+    keysecret: 
+    bucketname: 
