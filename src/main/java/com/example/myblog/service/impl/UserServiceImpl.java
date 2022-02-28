@@ -8,6 +8,8 @@ import com.example.myblog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -25,8 +27,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Blog requestBlogByDate(Integer count) {
-        return usermapper.requestBlogByDate(count);
+    public List<Blog> requestBlogByDate(Integer page) {
+        //查询全部数据
+        List<Blog> blogs = usermapper.requestBlogByDate();
+        //从第几条数据开始
+        int firstIndex = (page-1)*5;
+        //到第几条数据结束
+        int lastIndex =page*5-1;
+        if(lastIndex>usermapper.countBlog()){
+            lastIndex=usermapper.countBlog();
+        }
+        return blogs.subList(firstIndex,lastIndex); //直接在list中截取
     }
 
     @Override

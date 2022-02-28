@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 @Validated
 @RestController
@@ -33,15 +34,12 @@ public class UserController {
     }
 
     @PostMapping("/dateLine")
-    public Blog[] requestBlogByData(@NotBlank Integer count){
-        Blog[] blog=new Blog[5];
-        for(int j=0;j<5;j++){
-            blog[j] = userService.requestBlogByDate(count * 5 + j);
+    public List<Blog> requestBlogByData(@NotBlank Integer count){
+        List<Blog> blogs=userService.requestBlogByDate(count);
+        if(blogs==null){
+            throw new OperationFailException(403,"没有更多记录了");
         }
-        if (blog[0]==null&&blog[1]==null&&blog[2]==null&&blog[3]==null&&blog[4]==null) {
-            throw new OperationFailException(403,"没有更多记录");
-        }
-        return blog;
+        return blogs;
     }
 
 

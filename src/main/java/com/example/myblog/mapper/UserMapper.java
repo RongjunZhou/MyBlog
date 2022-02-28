@@ -7,14 +7,17 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @Mapper
 public interface UserMapper {
     Blog requestBlogByName(String blogName);
-    Blog requestBlogByDate(Integer count);
+    List<Blog> requestBlogByDate();
     Integer addUser(Account account);
     Integer fixPassword(@Param("username") String username, @Param("password") String password);
     Integer addComment(Comment comment);
     Account requestUserByName(String username);
     Integer checkUser(String username);
+    Integer countBlog();
 }
