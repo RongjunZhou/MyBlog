@@ -362,7 +362,7 @@
 
      ```json
      #param
-     	#count表示页数，首页为0，该方法每页返回5条记录，不会自动过滤空id记录
+     	#count表示页数，首页为1，该方法每页返回5条记录
      	count=int
      ```
 
@@ -375,21 +375,18 @@
            "success": true,
            "errCode": null,
            "errMsg": null,
-           "data": [
-               null,
-               null,
+           "data":{
                {
                    "id": 2,
                    "blogName": "404yyds",
                    "blogLocal": "https://jun-blog.oss-cn-hangzhou.aliyuncs.com/404.md"
                },
-               null,
                {
                    "id": 4,
                    "blogName": "ggg",
                    "blogLocal": "ggg"
                }
-           ]
+           }
        }
        ```
 
