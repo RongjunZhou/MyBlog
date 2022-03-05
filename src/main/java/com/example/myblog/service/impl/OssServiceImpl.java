@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URLEncoder;
 
 @Service
 public class OssServiceImpl implements OssService {
@@ -37,8 +38,9 @@ public class OssServiceImpl implements OssService {
             //关闭OssClient
             ossClient.shutdown();
 
-            //返回文件路径
-            return "https://"+bucketName+"."+endpoint+"/"+filename;
+            String url= "https://"+bucketName+"."+endpoint+"/"+filename;
+
+            return URLEncoder.encode(url);
 
         } catch (IOException e) {
             e.printStackTrace();
