@@ -3,6 +3,7 @@ package com.example.myblog.controller;
 import com.example.myblog.Utils.JWTUtils;
 import com.example.myblog.entity.Account;
 import com.example.myblog.exception.OperationFailException;
+import com.example.myblog.entity.ResultVO;
 import com.example.myblog.service.AdminService;
 import com.example.myblog.service.UserService;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -29,7 +30,7 @@ public class LoginAndRegisterController {
     private UserService userService;
 
     @PostMapping("/login")
-    public String login(@NotBlank String username, @NotBlank String password) {
+    public ResultVO login(@NotBlank String username, @NotBlank String password) {
 
         //判断用户名是否存在
         if(!userService.checkUser(username))
@@ -45,7 +46,7 @@ public class LoginAndRegisterController {
             map.put("username",accountInstance.getUsername());
             map.put("email",accountInstance.getEmail());
             map.put("role",accountInstance.getRole());
-            return JWTUtils.getToken(map);
+            return new ResultVO(JWTUtils.getToken(map));
         }
         else {
             throw new OperationFailException(403, "密码错误");
@@ -53,23 +54,23 @@ public class LoginAndRegisterController {
     }
 
     @PostMapping("/register")
-    public boolean addUser(@Validated Account account){
+    public ResultVO addUser(@Validated Account account){
         if(userService.checkUser(account.getUsername()))
         {
             throw new OperationFailException(403,"用户名已存在");
         }
         Account accountCase=new Account(account.getUsername(), DigestUtils.sha256Hex(account.getPassword()+DigestUtils.md5Hex(account.getPassword())),account.getEmail(),0);
-        return userService.addUser(accountCase);
+        return new ResultVO(userService.addUser(accountCase));
     }
 
     @PostMapping("/fixPassword")
-    public boolean fixPassword(@NotBlank String username,@NotBlank String originPassword,@NotBlank String newPassword){
+    public ResultVO fixPassword(@NotBlank String username,@NotBlank String originPassword,@NotBlank String newPassword){
         Account originAccount=userService.requestUserByName(username);
         if(!userService.checkUser(username)){
             throw new OperationFailException(403,"用户不存在");
         }
         if(DigestUtils.sha256Hex(originPassword+DigestUtils.md5Hex(originPassword)).equals(originAccount.getPassword())){
-            return userService.fixPassword(username,newPassword);
+            return new ResultVO(userService.fixPassword(username,newPassword));
         }
         else{
             throw new OperationFailException(500,"原密码错误");

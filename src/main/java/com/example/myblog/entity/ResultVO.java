@@ -1,4 +1,4 @@
-package com.example.myblog.exception;
+package com.example.myblog.entity;
 
 public class ResultVO {
 

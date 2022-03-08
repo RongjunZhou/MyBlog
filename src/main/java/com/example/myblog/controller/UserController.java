@@ -4,6 +4,7 @@ import com.example.myblog.Utils.JWTUtils;
 import com.example.myblog.entity.Blog;
 import com.example.myblog.entity.Comment;
 import com.example.myblog.exception.OperationFailException;
+import com.example.myblog.entity.ResultVO;
 import com.example.myblog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -26,33 +27,33 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("requestBlog")
-    public Blog requestBlogByName(@NotBlank String blogName){
+    public ResultVO requestBlogByName(@NotBlank String blogName){
         if(userService.requestBlogByName(blogName)==null){
             throw new OperationFailException(404,"请求资源不存在");
         }
-        return userService.requestBlogByName(blogName);
+        return new ResultVO(userService.requestBlogByName(blogName));
     }
 
     @PostMapping("/dateLine")
-    public List<Blog> requestBlogByData(@NotBlank Integer count){
+    public ResultVO requestBlogByData(@NotBlank Integer count){
         List<Blog> blogs=userService.requestBlogByDate(count);
         if(blogs==null){
             throw new OperationFailException(403,"没有更多记录了");
         }
-        return blogs;
+        return new ResultVO(blogs);
     }
 
 
     @PostMapping("/addComment")
-    public boolean addComment(@Validated Comment comment, HttpServletRequest request){
+    public ResultVO addComment(@Validated Comment comment, HttpServletRequest request){
         comment.setCommenter(JWTUtils.verifyToken(request.getHeader("token")).getClaim("username").asString());
         System.out.println(JWTUtils.verifyToken(request.getHeader("token")).getClaim("username").asString());
-        return userService.addComment(comment);
+        return new ResultVO(userService.addComment(comment));
     }
 
     @PostMapping("/getComment")
-    public List<Comment> requestComment(@NotBlank Integer blogId){
-        return userService.requestComment(blogId);
+    public ResultVO requestComment(@NotBlank Integer blogId){
+        return new ResultVO(userService.requestComment(blogId));
     }
 
 }

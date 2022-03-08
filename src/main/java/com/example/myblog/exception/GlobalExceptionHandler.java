@@ -1,5 +1,6 @@
 package com.example.myblog.exception;
 
+import com.example.myblog.entity.ResultVO;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ExceptionHandler;
