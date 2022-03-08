@@ -50,4 +50,9 @@ public class UserController {
         return userService.addComment(comment);
     }
 
+    @PostMapping("/getComment")
+    public List<Comment> requestComment(@NotBlank Integer blogId){
+        return userService.requestComment(blogId);
+    }
+
 }

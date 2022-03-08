@@ -20,4 +20,5 @@ public interface UserMapper {
     Account requestUserByName(String username);
     Integer checkUser(String username);
     Integer countBlog();
+    List<Comment> requestComment(Integer blogId);
 }
