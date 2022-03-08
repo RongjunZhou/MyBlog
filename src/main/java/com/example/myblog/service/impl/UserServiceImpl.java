@@ -59,4 +59,9 @@ public class UserServiceImpl implements UserService {
     public boolean addComment(Comment comment) {
         return usermapper.addComment(comment)>0;
     }
+
+    @Override
+    public List<Comment> requestComment(Integer blogId){
+        return usermapper.requestComment(blogId);
+    }
 }

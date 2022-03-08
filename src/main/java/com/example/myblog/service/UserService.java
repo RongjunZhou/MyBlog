@@ -14,4 +14,5 @@ public interface UserService {
     boolean addUser(Account account);
     boolean fixPassword(String username,String password);
     boolean addComment(Comment comment);
+    List<Comment> requestComment(Integer blogId);
 }

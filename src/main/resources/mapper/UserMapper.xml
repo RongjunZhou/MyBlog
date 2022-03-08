@@ -25,4 +25,7 @@
     <select id="countBlog" resultType="int">
         select count(*) from myblog.blog
     </select>
+    <select id="requestComment" parameterType="int" resultType="com.example.myblog.entity.Comment">
+        select * from myblog.comment where id=#{BlogId}
+    </select>
 </mapper>

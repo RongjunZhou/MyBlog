@@ -50,4 +50,12 @@ public class UserController {
         return userService.addComment(comment);
     }
 
+    @PostMapping("/getComment")
+    public List<Comment> requestComment(@NotBlank Integer blogId){
+        if(userService.requestComment(blogId)==null){
+            throw new OperationFailException(500,"暂时没有评论");
+        }
+        return userService.requestComment(blogId);
+    }
+
 }
