@@ -1,17 +1,17 @@
 package com.example.myblog.entity;
 
-public class ResultVO {
+public class Result {
 
     public int status;
     public String message;
     public Object data;
 
-    public ResultVO(int status, String message) {
+    public Result(int status, String message) {
         this.status = status;
         this.message = message;
     }
 
-    public ResultVO(Object data) {
+    public Result(Object data) {
         this.status = 200;
         this.message = "success";
         this.data = data;

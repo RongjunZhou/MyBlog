@@ -1,6 +1,6 @@
 package com.example.myblog.exception;
 
-import com.example.myblog.entity.ResultVO;
+import com.example.myblog.entity.Result;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -15,16 +15,16 @@ public class GlobalExceptionHandler {
      * 全局异常处理
      */
     @ExceptionHandler(Exception.class)
-    public ResultVO exceptionListener(Exception e){
-        return new ResultVO(500,e.toString());
+    public Result exceptionListener(Exception e){
+        return new Result(500,e.toString());
     }
 
     /**
      *  自定义异常处理
      */
     @ExceptionHandler(OperationFailException.class)
-    public ResultVO exceptionListener(OperationFailException e){
-        return new ResultVO(e.getCode(),e.getMsg());
+    public Result exceptionListener(OperationFailException e){
+        return new Result(e.getCode(),e.getMsg());
     }
 
     /**
